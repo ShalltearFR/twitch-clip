@@ -1,51 +1,54 @@
 import { HelixClip } from "@twurple/api";
+import cacheData from "../../lib/cacheData";
 
 export default defineEventHandler(async (event) => {
   const userID = event?.context?.params?.userID || "";
+  const cachedData = cacheData.get(`user${userID}`);
+  if (cachedData) {
+    return cachedData;
+  }
+
   const apiClient = (event.context as any).twitchAPI;
 
-  const streamer = await apiClient.clips.getClipById(userID);
-
   const maxClips = 5000;
-  const allClips = [];
+  const clipsPerPage = 100;
 
-  // Création de la requête paginée pour récupérer les clips
+  // Limite la requête à 5000 clips dès le début
   const paginatedRequest = apiClient.clips.getClipsForBroadcasterPaginated(
     userID,
-    { first: 100 } // Limite à 100 clips par requête
+    { first: Math.min(clipsPerPage, maxClips) }
   );
 
-  // Récupération des premières pages de clips
-  let clipBatch = await paginatedRequest.getNext();
+  const allClips: Array<Partial<HelixClip>> = [];
+  let totalClips = 0;
 
-  // Continue à paginer jusqu'à atteindre la limite de 5000 clips ou jusqu'à ce qu'il n'y ait plus de clips
-  while (clipBatch.length > 0 && allClips.length < maxClips) {
+  // Récupération des clips par page, en limitant à 5000
+  while (allClips.length < maxClips) {
+    const clipBatch = await paginatedRequest.getNext();
+
+    if (clipBatch.length === 0) break; // Arrête si plus de clips
+
     allClips.push(
-      ...clipBatch.map((clip: HelixClip) => ({
-        id: clip.id,
-        title: clip.title,
-        creatorDisplayName: clip.creatorDisplayName,
-        duration: clip.duration || 1,
-        views: clip.views,
-        gameId: clip.gameId,
-        //embedUrl: `https://clips.twitch.tv/embed?clip=${clip.id}&parent=localhost&autoplay=true`,
-        thumbnailUrl: clip.thumbnailUrl,
-        creationDate: clip.creationDate,
-      }))
+      ...clipBatch
+        .slice(0, maxClips - allClips.length)
+        .map((clip: HelixClip) => ({
+          id: clip.id,
+          title: clip.title,
+          creatorDisplayName: clip.creatorDisplayName,
+          duration: clip.duration || 1,
+          views: clip.views,
+          gameId: clip.gameId,
+          thumbnailUrl: clip.thumbnailUrl,
+          creationDate: clip.creationDate,
+        }))
     );
 
     // Si on atteint 5000 clips, on arrête
     if (allClips.length >= maxClips) {
-      allClips.length = maxClips; // Limite à 5000 clips
       break;
     }
-
-    // Récupération de la page suivante de clips
-    clipBatch = await paginatedRequest.getNext();
   }
 
-  // Réponse envoyée avec les clips et le nombre total
-  //res.send({ data: allClips, total: allClips.length });
-
+  cacheData.set(`user${userID}`, { data: allClips, total: allClips.length });
   return { data: allClips, total: allClips.length };
 });

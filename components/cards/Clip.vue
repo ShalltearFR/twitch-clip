@@ -13,7 +13,7 @@
         <div
           class="absolute bg-black/85 px-3 py-1 rounded-tr-lg rounded-bl-lg top-4 right-4"
         >
-          {{ date.toLocaleString() }}
+          {{ date.toLocaleDateString() }}
         </div>
         <div
           class="absolute bg-black/85 px-3 py-1 rounded-tr-lg rounded-bl-lg left-4 bottom-4"
