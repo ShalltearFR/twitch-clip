@@ -8,25 +8,35 @@
           <div
             class="w-24 h-24 bg-black absolute top-1 left-1 rounded-full"
           ></div>
-          <img
-            src="https://static-cdn.jtvnw.net/jtv_user_pictures/70066a45-404c-4faf-874e-fcc13f161496-profile_image-70x70.png"
-            alt="profil"
-            class="w-24 h-24 rounded-full absolute z-10"
-          />
+          <a
+            :href="`https://twitch.tv/${user.displayName.toLowerCase()}`"
+            target="_blank"
+          >
+            <img
+              :src="user.profilePictureUrl"
+              alt="profil"
+              class="w-24 h-24 rounded-full absolute z-10"
+            />
+          </a>
         </div>
-        <h2 class="text-4xl font-semibold">
-          {{ route.params.user }}
-        </h2>
+        <a
+          :href="`https://twitch.tv/${user.displayName.toLowerCase()}`"
+          target="_blank"
+        >
+          <h2 class="text-4xl font-semibold">
+            {{ user.displayName }}
+          </h2>
+        </a>
       </div>
       <div class="flex items-center gap-10">
         <NuxtLink
           class="w-40 text-center py-1 bg-[#A970FF] font-bold text-lg rounded-tl-lg rounded-br-lg"
-          to="/u/user/videos"
+          :to="`/u/${user.displayName.toLowerCase()}/videos`"
           >Videos</NuxtLink
         >
         <NuxtLink
           class="w-40 text-center py-1 bg-[#A970FF] font-bold text-lg rounded-bl-lg rounded-tr-lg"
-          to="/u/user/clips"
+          :to="`/u/${user.displayName.toLowerCase()}/clips`"
           >Clips</NuxtLink
         >
       </div>
@@ -37,14 +47,19 @@
       </div>
     </div>
     <p class="text-white italic text-center mt-2">
-      ze suis un text fdfsfsdfsdfds fsdf sf sdf sdf sdf sd fds f fff
-      ffsdfdsfdsfsfsdfsdfs fsdfsdf dsf dsfdsfdsfdsfdsf sdfsdfdsfdsf fdsfdsfds
-      fds fdsf dsf ds fdsf dsf sd
+      {{ user.description }}
     </p>
   </nav>
 </template>
 
 <script lang="ts" setup>
 import { MagnifyingGlassCircleIcon } from "@heroicons/vue/24/outline";
-const route = useRoute();
+import type { UserData } from "~/types/UserResponse";
+// defineProps(["user"]);
+defineProps<{
+  user: UserData; // Spécifiez le type ici
+}>();
+
+// const route = useRoute();
+// const userPath = route.params.user;
 </script>

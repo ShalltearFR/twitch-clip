@@ -12,6 +12,9 @@
   "dependencies": {
     "@heroicons/vue": "^2.1.5",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@twurple/api": "^7.2.0",
+    "@twurple/auth": "^7.2.0",
+    "mongoose": "^8.7.2",
     "nuxt": "^3.13.0",
     "vue": "latest",
     "vue-router": "latest"
