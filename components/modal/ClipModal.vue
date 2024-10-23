@@ -29,7 +29,7 @@
       </div>
       <iframe
         class="rounded-xl"
-        :src="`https://clips.twitch.tv/embed?clip=${data.id}&parent=['clip-twitch.vercel.app']&autoplay=true&width=960&height=540`"
+        :src="`https://clips.twitch.tv/embed?clip=${data.id}&parent=clip-twitch.vercel.app&autoplay=true&width=960&height=540`"
         width="960"
         height="540"
         scrolling="no"
