@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     "@nuxtjs/i18n",
     "@nuxt/image",
     "@nuxtjs/google-fonts",
-    "nuxt-security",
+    // "nuxt-security",
   ],
   i18n: {
     locales: [
@@ -37,40 +37,40 @@ export default defineNuxtConfig({
       cookieKey: "lang",
     },
   },
-  security: {
-    corsHandler: {
-      origin: process.env.WWW as string,
-      methods: ["GET"],
-    },
-    rateLimiter: {
-      headers: true,
-      interval: 60000,
-      tokensPerInterval: 10,
-    },
-    headers: {
-      xXSSProtection: "1",
-      contentSecurityPolicy: {
-        "default-src": ["'self'", "https://clips.twitch.tv"],
-        "frame-src": [
-          "'self'",
-          "https://clips.twitch.tv",
-          "https://clip-twitch.vercel.app",
-        ],
-        "img-src": [
-          "'self'",
-          "data:",
-          "https://static-cdn.jtvnw.net",
-          "*.twitch.tv",
-        ],
-        "script-src": [
-          "'self'",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-          "https://clips.twitch.tv",
-        ],
-      },
-    },
-  },
+  // security: {
+  //   corsHandler: {
+  //     origin: process.env.WWW as string,
+  //     methods: ["GET"],
+  //   },
+  //   rateLimiter: {
+  //     headers: true,
+  //     interval: 60000,
+  //     tokensPerInterval: 10,
+  //   },
+  //   headers: {
+  //     xXSSProtection: "1",
+  //     contentSecurityPolicy: {
+  //       "default-src": ["'self'", "https://clips.twitch.tv"],
+  //       "frame-src": [
+  //         "'self'",
+  //         "https://clips.twitch.tv",
+  //         "https://clip-twitch.vercel.app",
+  //       ],
+  //       "img-src": [
+  //         "'self'",
+  //         "data:",
+  //         "https://static-cdn.jtvnw.net",
+  //         "*.twitch.tv",
+  //       ],
+  //       "script-src": [
+  //         "'self'",
+  //         "'unsafe-inline'",
+  //         "'unsafe-eval'",
+  //         "https://clips.twitch.tv",
+  //       ],
+  //     },
+  //   },
+  // },
   routeRules: {
     "/api/**": {
       security: {
