@@ -54,15 +54,7 @@ export default defineNuxtConfig({
         "frame-src": [
           "'self'",
           "https://clips.twitch.tv",
-          "https://*.vercel.app",
-          "https://vercel.live",
-        ],
-        "script-src": [
-          "'self'",
-          "'unsafe-inline'", // Autorise les scripts inline
-          "'unsafe-eval'", // Si nécessaire
-          "https://clips.twitch.tv",
-          "https://*.vercel.app",
+          "https://clip-twitch.vercel.app",
         ],
         "img-src": [
           "'self'",
@@ -70,16 +62,12 @@ export default defineNuxtConfig({
           "https://static-cdn.jtvnw.net",
           "*.twitch.tv",
         ],
-        "style-src": ["'self'", "'unsafe-inline'"],
-        "script-src-elem": [
+        "script-src": [
           "'self'",
           "'unsafe-inline'",
           "'unsafe-eval'",
           "https://clips.twitch.tv",
-          "https://*.vercel.app",
-          "https://vercel.live", // Ajoutez aussi ici pour les éléments script
         ],
-        "script-src-attr": ["'self'", "'unsafe-inline'"],
       },
     },
   },
