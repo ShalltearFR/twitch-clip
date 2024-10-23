@@ -39,11 +39,7 @@ export default defineNuxtConfig({
   },
   security: {
     corsHandler: {
-      origin: [
-        "http://localhost:3020",
-        "https://clip-twitch.vercel.app",
-        "*.twitch.tv",
-      ],
+      origin: process.env.WWW as string, // Ajoutez ici les domaines autorisés
       methods: ["GET", "POST", "OPTIONS"],
     },
     rateLimiter: {
@@ -51,42 +47,42 @@ export default defineNuxtConfig({
       interval: 60000,
       tokensPerInterval: 10,
     },
-    headers: {
-      xXSSProtection: "1",
-      contentSecurityPolicy: {
-        "default-src": ["'self'", "https://clips.twitch.tv"],
-        "frame-src": [
-          "'self'",
-          "https://clips.twitch.tv",
-          "https://*.vercel.app",
-          "https://vercel.live",
-        ],
-        "script-src": [
-          "'self'",
-          "'unsafe-inline'", // Autorise les scripts inline
-          "'unsafe-eval'", // Si nécessaire
-          "https://clips.twitch.tv",
-          "https://*.vercel.app",
-          "https://vercel.live",
-        ],
-        "img-src": [
-          "'self'",
-          "data:",
-          "https://static-cdn.jtvnw.net",
-          "*.twitch.tv",
-        ],
-        "style-src": ["'self'", "'unsafe-inline'"],
-        "script-src-elem": [
-          "'self'",
-          "'unsafe-inline'",
-          "'unsafe-eval'",
-          "https://clips.twitch.tv",
-          "https://*.vercel.app",
-          "https://vercel.live", // Ajoutez aussi ici pour les éléments script
-        ],
-        "script-src-attr": ["'self'", "'unsafe-inline'"],
-      },
-    },
+    // headers: {
+    // xXSSProtection: "1",
+    // contentSecurityPolicy: {
+    //   "default-src": ["'self'", "https://clips.twitch.tv"],
+    //   "frame-src": [
+    //     "'self'",
+    //     "https://clips.twitch.tv",
+    //     "https://*.vercel.app",
+    //     "https://vercel.live",
+    //   ],
+    //   "script-src": [
+    //     "'self'",
+    //     "'unsafe-inline'", // Autorise les scripts inline
+    //     "'unsafe-eval'", // Si nécessaire
+    //     "https://clips.twitch.tv",
+    //     "https://*.vercel.app",
+    //     "https://vercel.live",
+    //   ],
+    //   "img-src": [
+    //     "'self'",
+    //     "data:",
+    //     "https://static-cdn.jtvnw.net",
+    //     "*.twitch.tv",
+    //   ],
+    //   "style-src": ["'self'", "'unsafe-inline'"],
+    //   "script-src-elem": [
+    //     "'self'",
+    //     "'unsafe-inline'",
+    //     "'unsafe-eval'",
+    //     "https://clips.twitch.tv",
+    //     "https://*.vercel.app",
+    //     "https://vercel.live", // Ajoutez aussi ici pour les éléments script
+    //   ],
+    //   "script-src-attr": ["'self'", "'unsafe-inline'"],
+    // },
+    // },
   },
   routeRules: {
     "/api/**": {
