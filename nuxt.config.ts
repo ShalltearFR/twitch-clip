@@ -51,8 +51,6 @@ export default defineNuxtConfig({
       xXSSProtection: "1",
       contentSecurityPolicy: {
         "frame-ancestors": ["'self'", "https://clips.twitch.tv"], // Allows iframe embedding from these domains
-        "frame-src": ["https://clips.twitch.tv"], // Allows iframes to be loaded from this domain
-
         // Format correct pour Nuxt Security
         "img-src": [
           "'self'",
@@ -61,7 +59,12 @@ export default defineNuxtConfig({
           "*.twitch.tv",
         ],
         // Tu peux ajouter d'autres directives si nécessaire :
-        "default-src": ["'self'"],
+        "default-src": ["'self'", "https://clips.twitch.tv"],
+        "frame-src": [
+          "'self'",
+          "https://clips.twitch.tv",
+          "https://clip-twitch.vercel.app",
+        ],
         // Par exemple pour les scripts, styles, etc.
         "script-src": [
           "'self'", // Scripts provenant du même domaine
