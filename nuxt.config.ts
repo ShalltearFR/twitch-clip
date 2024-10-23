@@ -50,19 +50,15 @@ export default defineNuxtConfig({
     headers: {
       xXSSProtection: "1",
       contentSecurityPolicy: {
-        "default-src": [
-          "'self'",
-          "https://clips.twitch.tv",
-          "https://clips.twitch.tv",
-        ],
+        "default-src": ["'self'"],
         "frame-ancestors": [
           "'self'",
+          "*.twitch.tv",
           "https://clip-twitch.vercel.app",
-          "https://clips.twitch.tv",
         ],
         "frame-src": [
           "'self'",
-          "https://clips.twitch.tv",
+          "*.twitch.tv",
           "https://clip-twitch.vercel.app",
         ],
         "img-src": [
@@ -71,7 +67,6 @@ export default defineNuxtConfig({
           "https://static-cdn.jtvnw.net",
           "*.twitch.tv",
         ],
-        "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:"],
       },
     },
   },
