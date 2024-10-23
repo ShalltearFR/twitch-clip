@@ -50,8 +50,16 @@ export default defineNuxtConfig({
     headers: {
       xXSSProtection: "1",
       contentSecurityPolicy: {
-        "default-src": ["'self'", "https://clips.twitch.tv"],
-        "frame-ancestors": ["'self'", "https://clip-twitch.vercel.app"],
+        "default-src": [
+          "'self'",
+          "https://clips.twitch.tv",
+          "https://clips.twitch.tv",
+        ],
+        "frame-ancestors": [
+          "'self'",
+          "https://clip-twitch.vercel.app",
+          "https://clips.twitch.tv",
+        ],
         "frame-src": [
           "'self'",
           "https://clips.twitch.tv",
