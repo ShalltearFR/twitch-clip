@@ -71,6 +71,14 @@ export default defineNuxtConfig({
           "*.twitch.tv",
         ],
         "style-src": ["'self'", "'unsafe-inline'"],
+        "script-src-elem": [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https://clips.twitch.tv",
+          "https://*.vercel.app",
+          "https://vercel.live", // Ajoutez aussi ici pour les éléments script
+        ],
         "script-src-attr": ["'self'", "'unsafe-inline'"],
       },
     },
