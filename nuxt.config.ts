@@ -90,7 +90,7 @@ export default defineNuxtConfig({
         rateLimiter: { headers: true, interval: 60000, tokensPerInterval: 5 },
       },
       headers: {
-        "Access-Control-Allow-Origin": process.env.WWW as string,
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST",
         "Access-Control-Allow-Headers":
           "Origin, X-Requested-With, Content-Type, Accept",
