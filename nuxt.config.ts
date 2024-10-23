@@ -3,7 +3,6 @@ export default defineNuxtConfig({
   devServer: {
     port: 3020,
   },
-
   runtimeConfig: {
     public: {
       baseURL: process.env.BASE_URL as string,
@@ -13,11 +12,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ["@/assets/styles/global.css"],
   modules: [
+    "@nuxtjs/tailwindcss",
     "@nuxtjs/i18n",
     "@nuxt/image",
     "@nuxtjs/google-fonts",
     "nuxt-security",
-    "@nuxtjs/tailwindcss",
   ],
   i18n: {
     locales: [
@@ -51,6 +50,9 @@ export default defineNuxtConfig({
     headers: {
       xXSSProtection: "1",
       contentSecurityPolicy: {
+        "frame-ancestors": ["'self'", "https://clips.twitch.tv"], // Allows iframe embedding from these domains
+        "frame-src": ["https://clips.twitch.tv"], // Allows iframes to be loaded from this domain
+
         // Format correct pour Nuxt Security
         "img-src": [
           "'self'",

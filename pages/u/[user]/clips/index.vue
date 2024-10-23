@@ -1,5 +1,8 @@
 <template>
   <div class="flex bg-gray-900">
+    <div v-if="isModalOpen">
+      <ClipModal :data="ModalData" @close="closeModal" />
+    </div>
     <Menu />
     <div class="mx-auto">
       <NavBar v-if="user?.success && user.data" :user="user.data" />
@@ -17,7 +20,9 @@
         class="flex items-center justify-center gap-12 mt-10 flex-wrap"
       >
         <div v-for="clip in clipsData?.data" :key="clip.id">
-          <Clip :data="clip" />
+          <button @click="openModal(clip)">
+            <Clip :data="clip" />
+          </button>
         </div>
       </div>
     </div>
@@ -28,10 +33,9 @@
 import Menu from "~/components/menu/Menu.vue";
 import NavBar from "~/components/nav/NavBar.vue";
 import Clip from "~/components/cards/Clip.vue";
+import ClipModal from "~/components/modal/ClipModal.vue";
 import { useRoute } from "vue-router";
 import { ref } from "vue";
-import type { UserResponse } from "~/types/UserResponse";
-import type { Clips } from "~/types/Clips";
 
 // Route pour obtenir les informations de l'utilisateur
 const route = useRoute();
@@ -40,10 +44,20 @@ const userParams = route.params.user;
 // Variables pour stocker l'état utilisateur et clips
 const user = ref<UserResponse | null>(null);
 const clipsData = ref<Clips | null>(null);
-const loading = ref(true); // Gérer l'état de chargement
+const loading = ref(true);
+const ModalData = ref();
+const isModalOpen = ref(false);
+
+import type { UserResponse } from "~/types/UserResponse";
+import type { ClipData, Clips } from "~/types/Clips";
+
+const openModal = (data: ClipData) => {
+  ModalData.value = data;
+  isModalOpen.value = true; // Ouvre la modal
+};
+const closeModal = () => (isModalOpen.value = false); // Ferme la modal
 
 // Charger les données utilisateur sans attendre le résultat
-
 useFetch<UserResponse>(`/api/user/${userParams}`).then((response) => {
   user.value = response.data.value;
 
