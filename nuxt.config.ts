@@ -51,11 +51,7 @@ export default defineNuxtConfig({
       xXSSProtection: "1",
       contentSecurityPolicy: {
         "default-src": ["'self'"],
-        "frame-src": [
-          "'self'",
-          "https://clips.twitch.tv",
-          "https://clip-twitch.vercel.app",
-        ],
+        "frame-src": ["'self'", "https://clips.twitch.tv", "*.vercel.app"],
         "script-src": ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https:"],
         "img-src": [
           "'self'",
