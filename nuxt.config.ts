@@ -51,6 +51,7 @@ export default defineNuxtConfig({
       xXSSProtection: "1",
       xFrameOptions: "SAMEORIGIN",
       crossOriginEmbedderPolicy: "unsafe-none",
+      crossOriginOpenerPolicy: false,
       contentSecurityPolicy: {
         "default-src": ["'self'", "https://clips.twitch.tv"],
         "frame-src": [
