@@ -89,7 +89,6 @@ export default defineNuxtConfig({
       security: {
         rateLimiter: { headers: true, interval: 60000, tokensPerInterval: 5 },
       },
-      cors: true,
       headers: {
         "Access-Control-Allow-Origin": process.env.WWW as string,
         "Access-Control-Allow-Methods": "GET, POST",
@@ -98,11 +97,11 @@ export default defineNuxtConfig({
         xXSSProtection: "1",
         "Content-Security-Policy": [
           "default-src 'self' https://clips.twitch.tv",
-          "frame-src 'self' https://clips.twitch.tv https://*.vercel.app https://vercel.live",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clips.twitch.tv https://*.vercel.app https://vercel.live",
+          "frame-src 'self' https://clips.twitch.tv https://clip-twitch.vercel.app https://vercel.live",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://clips.twitch.tv https://clip-twitch.vercel.app https://vercel.live",
           "img-src 'self' data: https://static-cdn.jtvnw.net *.twitch.tv",
           "style-src 'self' 'unsafe-inline'",
-          "script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://clips.twitch.tv https://*.vercel.app https://vercel.live",
+          "script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https://clips.twitch.tv https://clip-twitch.vercel.app https://vercel.live",
           "script-src-attr 'self' 'unsafe-inline'",
         ].join("; "),
       },
