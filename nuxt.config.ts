@@ -81,6 +81,13 @@ export default defineNuxtConfig({
           "https://vercel.live", // Ajoutez aussi ici pour les éléments script
         ],
         "script-src-attr": ["'self'", "'unsafe-inline'"],
+        "frame-ancestors": [
+          "'self'",
+          "https://clip-twitch.vercel.app",
+          "http://localhost:*",
+          "https://localhost:*",
+          "https://clips.twitch.tv",
+        ],
       },
     },
   },
